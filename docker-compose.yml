@@ -2,10 +2,10 @@ version: '2'
 
 services:
   zabbix-appliance:
-    # image: zabbix/zabbix-appliance:centos-3.4-latest
-    build: ./build_zabbix
+    image: imaoxian/zabbix-docker-cn
+    # build: ./build_zabbix
     user: root
-    mem_limit: 2048m
+    mem_limit: 1024m
     ulimits:
       nproc: 65535
       nofile:
@@ -13,8 +13,8 @@ services:
         hard: 40000
     ports:
       - "10051:10051"
-      - "20080:80"
-      - "20443:443"
+      - "80:80"
+      - "3306:3306"
     environment:
       - LANG=zh_CN.utf8
       - LC_ALL=zh_CN.utf8
@@ -24,11 +24,8 @@ services:
       - ZBX_SERVER_NAME=Zabbix_appliance  # 右上角显示的 Server 名称
       - ZBX_UPLOADMAXFILESIZE= 20M     # PHP 上传文件大小限制
       - ZBX_MEMORYLIMIT=512M           # PHP 内存限制
-
     volumes:
-      # - /data/zabbix/conf:/etc/zabbix
-      - /data/zabbix/zabbix_sricpts:/usr/lib/zabbix
-      - /data/zabbix/zabbix_certs:/var/lib/zabbix
-      - /data/zabbix/nginx_ssl:/etc/ssl/nginx
-
-    # Zabbix 初始账号密码为  Admin zabbix
+      - /data/zabbix/alertscripts:/usr/lib/zabbix/alertscripts
+      - /data/zabbix/externalscripts:/usr/lib/zabbix/externalscripts
+      - /data/zabbix/modules:/var/lib/zabbix/modules
+      - /data/zabbix/snmptraps:/var/lib/zabbix/snmptraps

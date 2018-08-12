@@ -6,7 +6,8 @@ COPY ["conf/Centos-7.repo", "/etc/yum.repos.d/"]
 COPY ["fonts/msyh.ttf", "/usr/share/fonts/dejavu"]
 
 RUN yum makecache && \
-    yum --nogpgcheck -y install kde-l10n-Chinese glibc-common && \
+    yum --nogpgcheck -y install kde-l10n-Chinese glibc-common \
+    traceroute sudo && \
     localedef -c -f UTF-8 -i zh_CN zh_CN.utf8 && \
     export LC_ALL=zh_CN.utf8 && \
     yum -y clean all && \

@@ -1,4 +1,4 @@
-FROM zabbix/zabbix-appliance:centos-3.4.14
+FROM zabbix/zabbix-appliance:centos-3.4.15
 
 RUN find /etc/yum.repos.d/*.repo -type f | xargs -i mv {} {}.bak
 

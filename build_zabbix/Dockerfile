@@ -3,7 +3,7 @@ FROM zabbix/zabbix-appliance:centos-3.4.15
 RUN find /etc/yum.repos.d/*.repo -type f | xargs -i mv {} {}.bak
 
 COPY ["conf/Centos-7.repo", "/etc/yum.repos.d/"]
-COPY ["fonts/msyh.ttf", "/usr/share/fonts/dejavu"]
+COPY ["fonts/lthpro.ttf", "/usr/share/fonts/dejavu"]
 
 RUN yum makecache && \
     yum --nogpgcheck -y install kde-l10n-Chinese glibc-common \
@@ -15,6 +15,6 @@ RUN yum makecache && \
 
 RUN rm -rf /etc/localtime && ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     rm -f /usr/share/zabbix/fonts/graphfont.ttf && \
-    ln -s /usr/share/fonts/dejavu/msyh.ttf /usr/share/zabbix/fonts/graphfont.ttf
+    ln -s /usr/share/fonts/dejavu/lthpro.ttf /usr/share/zabbix/fonts/graphfont.ttf
 
 EXPOSE 80/TCP 443/TCP 10051/TCP 3306/TCP
